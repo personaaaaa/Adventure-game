@@ -1,3 +1,1 @@
-"C:\Program Files\JetBrains\CLion 2020.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\HelloWorld.dir/objects.a
-C:\MinGW\bin\ar.exe cr CMakeFiles\HelloWorld.dir/objects.a @CMakeFiles\HelloWorld.dir\objects1.rsp
-C:\MinGW\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\HelloWorld.dir/objects.a -Wl,--no-whole-archive  -o HelloWorld.exe -Wl,--out-implib,libHelloWorld.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\HelloWorld.dir\linklibs.rsp
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names -L/usr/local/opt/opencv@3/lib CMakeFiles/HelloWorld.dir/main.cpp.o  -o HelloWorld 

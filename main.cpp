@@ -6,6 +6,16 @@
 #define NUM_DESTORY 5
 #define NUM_GEM 3
 
+// 定义结构体 - 宝石
+struct Gem {
+    // id - 作为宝石的唯一数字标记，每种宝石只有这一个标记
+    int id;
+    // name - 宝石名称
+    char *name;
+    // grade - 宝石得分
+    int grade;
+};
+
 /*
     for (int i=0;i<5;i++){
         printf(destory_number[i]);

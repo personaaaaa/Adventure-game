@@ -3,18 +3,46 @@
 #include<iostream>
 #include<time.h>
 #include<string.h>
+#define NUM_DESTORY 5
+#define NUM_GEM 3
 
-char query(char *destory[], int number){
-    for (int i=0;i<number;i++){
-        if (strcmp(destory[number],destory[i])==0){
-            printf("the game is over!\n");
-            return true;
-        }
+/*
+    for (int i=0;i<5;i++){
+        printf(destory_number[i]);
+    }
+ */
+
+/*
+ * char Choose(char choose){
+    if (strcmp(choose,"Yes") == 0){
+
+    }
+}
+ */
+int destory_number[NUM_DESTORY]={0,0,0,0,0};
+int grade = 0;
+
+char Destory (int destory){
+    //int destory_number[NUM_DESTORY];
+    char *destory_detail[NUM_DESTORY]={"dizheng","tafang","mengshou","hongshui","ganhan"};
+    printf("%s has happended\n",destory_detail[destory-1]);
+    destory_number[destory-1] += 1;
+    if (destory_number[destory-1] > 1){
+        return true;
     }
     return false;
 }
+
+char Grade(int number){
+    char *type_gem[NUM_GEM] = {"hupo","zhuanshi","hongbaoshi"};
+    int gem_grade[NUM_GEM] = {1,15,5};
+    printf("you have got a %s\n",type_gem[number-1]);
+    grade += gem_grade[number-1];
+    return grade;
+}
+
 int main(){
-    int round = 1,flag=0,grade = 0;
+    int round = 1,flag=0;
     char name[100];
     printf("input your name:");
     scanf("%s",&name);
@@ -23,54 +51,13 @@ int main(){
         char *destory_detail[6];
         printf("this is the round %d\n",round);
         srand(time(NULL));
-        int destory = rand()%5 +1;
-        if (destory == 1){
-            printf("dizheng has happended\n");
-            destory_detail[round-1] = "dizheng";
-            if (query(destory_detail,round-1)){
-                printf("you have none grade!\n");
-                exit(0);
-            }
-        }else if(destory == 2){
-            printf("tafang has happended\n");
-            destory_detail [round-1] = "tafang";
-            if (query(destory_detail,round-1)){
-                printf("you have none grade!\n");
-                exit(0);
-            }
-        }else if(destory == 3){
-            printf("megnshou has happended\n");
-            destory_detail[round-1] = "mengshou";
-            if (query(destory_detail,round-1)){
-                printf("you have none grade!\n");
-                exit(0);
-            }
-        }else if(destory == 4){
-            printf("hongshui has happended\n");
-            destory_detail[round-1] = "hongshui";
-            if (query(destory_detail,round-1)){
-                printf("you have none grade!\n");
-                exit(0);
-            }
-        }else{
-            printf("ganhan has happended\n");
-            destory_detail[round-1] = "ganhan";
-            if (query(destory_detail,round-1)){
-                printf("you have none grade!\n");
-                exit(0);
-            }
+        int destory = rand()%NUM_DESTORY +1;
+        if(Destory(destory)){
+            printf("you have none grade!\n");
+            exit(0);
         }
-        int number = rand()%15 + 1;
-        if (number<=5){
-            grade += 1;
-            printf("you get a hupo!\n");
-        }else if(number>10){
-            grade += 15;
-            printf("you get a zhuanshi!\n");
-        }else{
-            grade +=5;
-            printf("you get a hongbaoshi!\n");
-        }
+        int number = rand()%3 + 1;
+        Grade(number);
         printf("if you want to continue? Yes OR No\n");
         scanf("%s",&choose);
         if (strcmp(choose,"Yes") == 0){

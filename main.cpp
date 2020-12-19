@@ -1,4 +1,3 @@
-/*
 //冒险游戏设计
 #include<stdio.h>
 #include<iostream>
@@ -18,19 +17,6 @@ struct Gem {
     int grade;
 };
 
-/*
-    for (int i=0;i<5;i++){
-        printf(destory_number[i]);
-    }
- */
-
-/*
- * char Choose(char choose){
-    if (strcmp(choose,"Yes") == 0){
-
-    }
-}
- */
 
 int destory_number[NUM_DESTORY] = {0, 0, 0, 0, 0};
 int grade = 0;

@@ -31,9 +31,6 @@ char Destory(int destory) {
     char *destory_detail[NUM_DESTORY] = {"dizheng", "tafang", "mengshou", "hongshui", "ganhan"};
     printf("%s has happended\n", destory_detail[destory - 1]);
     destory_number[destory - 1] += 1;
-    for (int i=0;i<5;i++){
-        printf("%s\n", destory_number[i]);
-    }
     if (destory_number[destory - 1] > 1) {
         return true;
     }

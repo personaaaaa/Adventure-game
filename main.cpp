@@ -8,7 +8,7 @@
 #define NUM_GEM 3
 
 // 定义结构体 - 宝石
-struct Gem {
+struct Gems {
     // id - 作为宝石的唯一数字标记，每种宝石只有这一个标记
     int id;
     // name - 宝石名称
@@ -17,6 +17,11 @@ struct Gem {
     int grade;
 };
 
+struct Gems str[4]={
+                        {1,"hupo",1},
+                        {2,"zhuanshi",15},
+                        {3,"hongbaoshi",5}
+                    };
 
 int destory_number[NUM_DESTORY] = {0, 0, 0, 0, 0};
 int grade = 0;
@@ -35,17 +40,10 @@ char Destory(int destory) {
     return false;
 }
 
-char Grade(int number) {
-    char *type_gem[NUM_GEM] = {"hupo", "zhuanshi", "hongbaoshi"};
-    int gem_grade[NUM_GEM] = {1, 15, 5};
-    printf("you have got a %s\n", type_gem[number - 1]);
-    grade += gem_grade[number - 1];
-    return grade;
-}
-
 int main() {
     int round = 1, flag = 0;
     char name[100];
+    struct Gems *p;
     printf("input your name:");
     scanf("%s", &name);
     do {
@@ -59,7 +57,13 @@ int main() {
             exit(0);
         }
         int number = rand() % 3 + 1;
-        Grade(number);
+        for (p=str;p<str+3;p++){
+            if (number==p->id){
+                printf("you have get a %s\n",p->name);
+                grade += p->grade;
+                printf("your grade is %d\n",grade);
+            }
+        }
         reinput:
         printf("if you want to continue? Yes OR No\n");
         scanf("%s", &choose);
@@ -77,8 +81,6 @@ int main() {
         round += 1;
     } while (flag == 1);
 }
-
-*/
 
 /*
 #include<stdio.h>

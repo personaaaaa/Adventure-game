@@ -1,5 +1,5 @@
-## Adventure Game
-
+Adventure Game
+--
 Adventure Game - practice for c language learning.
 
 ### 小王的探险故事 <br >
@@ -16,8 +16,14 @@ Adventure Game - practice for c language learning.
     的鄙视:(。
     
     接下来，请小李设计一个算法程序，让小王保证能安全回来的同时，尽可能多的带走财宝。
+计划
+---
+- [ ] 对象数据用结构体保存
+    - [ ] Gem 写入结构体，并用单独头文件保存
+    - [ ] Disaster 写入结构体，并用单独头文件保存
 
-### 程序为什么要这样改？
+程序为什么要这样改？
+---
 
 ##### 为什么要用结构体
 

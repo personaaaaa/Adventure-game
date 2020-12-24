@@ -3,58 +3,50 @@
 #include<iostream>
 #include<time.h>
 #include<string.h>
+#include "gem.h"
+#include "disaster.h"
 
 #define NUM_DESTORY 5
 #define NUM_GEM 3
 
-// 定义结构体 - 宝石
-struct Gems {
-    // id - 作为宝石的唯一数字标记，每种宝石只有这一个标记
-    int id;
-    // name - 宝石名称
-    char *name;
-    // grade - 宝石得分
-    int grade;
-};
-
-struct Gems str[4]={
+struct Gems gem[3]={
                         {1,"hupo",1},
                         {2,"zhuanshi",15},
                         {3,"hongbaoshi",5}
                     };
 
-int destory_number[NUM_DESTORY] = {0, 0, 0, 0, 0};
-int grade = 0;
-
-char Destory(int destory) {
-    //int destory_number[NUM_DESTORY];
-    char *destory_detail[NUM_DESTORY] = {"dizheng", "tafang", "mengshou", "hongshui", "ganhan"};
-    printf("%s has happended\n", destory_detail[destory - 1]);
-    destory_number[destory - 1] += 1;
-    if (destory_number[destory - 1] > 1) {
-        return true;
-    }
-    return false;
-}
+struct Disaster detail[5]={
+                            {"dizheng",1,0},
+                            {"tafang",2,0},
+                            {"mengshou",3,0},
+                            {"hongshui",4,0},
+                            {"ganhan",5,0}
+                        };
 
 int main() {
-    int round = 1, flag = 0;
+    int round = 1, flag = 0, grade = 0;
     char name[100];
     struct Gems *p;
+    struct Disaster *q;
     printf("input your name:");
     scanf("%s", &name);
     do {
         char choose[10];
-        char *destory_detail[6];
         printf("this is the round %d\n", round);
         srand(time(NULL));
         int destory = rand() % NUM_DESTORY + 1;
-        if (Destory(destory)) {
-            printf("you have none grade!\n");
-            exit(0);
+        for (q=detail;q<detail+5;q++){
+            if(destory==q->id){
+                printf("%s has happended\n",q->name);
+                q->num += 1;
+            }
+            if (q->num > 1){
+                printf("you hava none grade!\n");
+                exit(0);
+            }
         }
         int number = rand() % 3 + 1;
-        for (p=str;p<str+3;p++){
+        for (p=gem;p<gem+3;p++){
             if (number==p->id){
                 printf("you have get a %s\n",p->name);
                 grade += p->grade;

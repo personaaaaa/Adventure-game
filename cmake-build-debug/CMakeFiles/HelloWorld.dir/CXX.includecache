@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+C:/Users/Li Wenshu/CLionProjects/Workspace/Adventure-game/disaster.h
+
+C:/Users/Li Wenshu/CLionProjects/Workspace/Adventure-game/gem.h
+
 C:/Users/Li Wenshu/CLionProjects/Workspace/Adventure-game/main.cpp
 stdio.h
 -
@@ -15,6 +19,10 @@ time.h
 -
 string.h
 -
+gem.h
+C:/Users/Li Wenshu/CLionProjects/Workspace/Adventure-game/gem.h
+disaster.h
+C:/Users/Li Wenshu/CLionProjects/Workspace/Adventure-game/disaster.h
 stdio.h
 -
 iostream

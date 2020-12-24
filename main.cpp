@@ -6,23 +6,6 @@
 #include "gem.h"
 #include "disaster.h"
 
-#define NUM_DESTORY 5
-#define NUM_GEM 3
-
-struct Gems gem[3]={
-                        {1,"hupo",1},
-                        {2,"zhuanshi",15},
-                        {3,"hongbaoshi",5}
-                    };
-
-struct Disaster detail[5]={
-                            {"dizheng",1,0},
-                            {"tafang",2,0},
-                            {"mengshou",3,0},
-                            {"hongshui",4,0},
-                            {"ganhan",5,0}
-                        };
-
 int main() {
     int round = 1, flag = 0, grade = 0;
     char name[100];
@@ -35,7 +18,7 @@ int main() {
         printf("this is the round %d\n", round);
         srand(time(NULL));
         int destory = rand() % NUM_DESTORY + 1;
-        for (q=detail;q<detail+5;q++){
+        for (q=detail;q<detail+NUM_DESTORY;q++){
             if(destory==q->id){
                 printf("%s has happended\n",q->name);
                 q->num += 1;
@@ -45,8 +28,8 @@ int main() {
                 exit(0);
             }
         }
-        int number = rand() % 3 + 1;
-        for (p=gem;p<gem+3;p++){
+        int number = rand() % NUM_GEM + 1;
+        for (p=gem;p<gem+NUM_GEM;p++){
             if (number==p->id){
                 printf("you have get a %s\n",p->name);
                 grade += p->grade;

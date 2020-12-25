@@ -23,4 +23,23 @@ struct Gems gem[NUM_GEM]={
         {3,"hongbaoshi",5}
 };
 
+struct Gems *p;
+
+int gem_number(){
+    srand(time(NULL));
+    int number = rand() % NUM_GEM + 1;
+    return number;
+}
+
+int gem_get(int number_gem, int grade){
+    for (p=gem;p<gem+NUM_GEM;p++){
+        if (number_gem==p->id){
+            printf("you have get a %s\n",p->name);
+            grade += p->grade;
+            printf("your grade is %d\n",grade);
+        }
+    }
+    return grade;
+}
+
 #endif //HELLOWORLD_GEM_H

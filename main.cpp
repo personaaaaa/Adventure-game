@@ -9,33 +9,17 @@
 int main() {
     int round = 1, flag = 0, grade = 0;
     char name[100];
-    struct Gems *p;
-    struct Disaster *q;
     printf("input your name:");
     scanf("%s", &name);
     do {
         char choose[10];
         printf("this is the round %d\n", round);
-        srand(time(NULL));
-        int destory = rand() % NUM_DESTORY + 1;
-        for (q=detail;q<detail+NUM_DESTORY;q++){
-            if(destory==q->id){
-                printf("%s has happended\n",q->name);
-                q->num += 1;
-            }
-            if (q->num > 1){
-                printf("you hava none grade!\n");
-                exit(0);
-            }
+        int destory_num = destory();
+        int gem_num = gem_number();
+        if(disaster(destory_num)){
+            exit(0);
         }
-        int number = rand() % NUM_GEM + 1;
-        for (p=gem;p<gem+NUM_GEM;p++){
-            if (number==p->id){
-                printf("you have get a %s\n",p->name);
-                grade += p->grade;
-                printf("your grade is %d\n",grade);
-            }
-        }
+        grade = gem_get(gem_num,grade);
         reinput:
         printf("if you want to continue? Yes OR No\n");
         scanf("%s", &choose);

@@ -21,4 +21,26 @@ struct Disaster detail[NUM_DESTORY]={
         {"ganhan",5,0}
 };
 
+struct Disaster *q;
+
+int destory(){
+    srand(time(NULL));
+    int destory = rand() % NUM_DESTORY + 1;
+    return destory;
+}
+
+int disaster(int num_destory){
+    for (q=detail;q<detail+NUM_DESTORY;q++){
+        if(num_destory==q->id){
+            printf("%s has happended\n",q->name);
+            q->num += 1;
+        }
+        if (q->num > 1){
+            printf("you hava none grade!\n");
+            return true;
+        }
+    }
+    return false;
+}
+
 #endif //HELLOWORLD_DISASTER_H

@@ -1,14 +1,13 @@
 //
 // Created by Li Wenshu on 2020/12/24.
 //
-
 #ifndef HELLOWORLD_GEM_H
 #define HELLOWORLD_GEM_H
-
 #define NUM_GEM 3
-
+#include<map>
+using namespace std;
 // 定义结构体 - 宝石
-struct Gems {
+struct Gem {
     // id - 作为宝石的唯一数字标记，每种宝石只有这一个标记
     int id;
     // name - 宝石名称
@@ -16,30 +15,21 @@ struct Gems {
     // grade - 宝石得分
     int grade;
 };
-
-struct Gems gem[NUM_GEM]={
-        {1,"hupo",1},
-        {2,"zhuanshi",15},
-        {3,"hongbaoshi",5}
-};
-
-struct Gems *p;
-
-int gem_number(){
+//宝石的对应id获取
+int gem_get(int grade){
     srand(time(NULL));
-    int number = rand() % NUM_GEM + 1;
-    return number;
-}
-
-int gem_get(int number_gem, int grade){
-    for (p=gem;p<gem+NUM_GEM;p++){
-        if (number_gem==p->id){
-            printf("you have get a %s\n",p->name);
-            grade += p->grade;
+    int number_gem = rand() % NUM_GEM + 1;
+    map<int,Gem> gems;
+    gems[0] = {1,"hupo",1};
+    gems[1] = {2,"zhuanshi",15};
+    gems[2] = {3,"hongbaoshi",5};
+    for(int i=0;i<gems.size();i++){
+        if (number_gem==gems[i].id){
+            printf("you have get a %s\n",gems[i].name);
+            grade += gems[i].grade;
             printf("your grade is %d\n",grade);
         }
     }
     return grade;
 }
-
 #endif //HELLOWORLD_GEM_H

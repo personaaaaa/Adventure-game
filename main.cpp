@@ -14,12 +14,10 @@ int main() {
     do {
         char choose[10];
         printf("this is the round %d\n", round);
-        int destory_num = destory();
-        int gem_num = gem_number();
-        if(disaster(destory_num)){
+        if(disaster()){
             exit(0);
         }
-        grade = gem_get(gem_num,grade);
+        grade = gem_get(grade);
         reinput:
         printf("if you want to continue? Yes OR No\n");
         scanf("%s", &choose);

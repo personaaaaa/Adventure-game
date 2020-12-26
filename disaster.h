@@ -22,12 +22,8 @@ void initialize_disaster(){
 //灾难对应id的获取
 Disaster disaster_get(){
     srand(time(NULL));
-    int destory_num = rand() % NUM_DESTORY + 1;
-    for(int i=0;i<disaster_kind.size();i++){
-        if(destory_num==disaster_kind[i].id){
-            disaster_kind[i].num += 1;
-            return disaster_kind[i];
-        }
-    }
+    int destory_num = rand() % NUM_DESTORY;
+    disaster_kind[destory_num].num++;
+    return disaster_kind[destory_num];
 }
 #endif //HELLOWORLD_DISASTER_H

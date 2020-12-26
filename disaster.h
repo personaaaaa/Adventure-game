@@ -9,6 +9,13 @@ struct Disaster{
     char *name;
     int id;
     int num;
+    //方法定义：获取灾难的名称和发生次数
+    char *get_disastername(){
+        return name;
+    }
+    int get_disasternum(){
+        return num;
+    }
 };
 //灾难map的定义初始化
 map <int,Disaster> disaster_kind;
@@ -25,12 +32,5 @@ Disaster disaster_get(){
     int destory_num = rand() % NUM_DESTORY;
     disaster_kind[destory_num].num++;
     return disaster_kind[destory_num];
-}
-
-char *get_disastername(struct Disaster destory){
-    return destory.name;
-}
-int get_disasternum(struct Disaster destory){
-    return destory.num;
 }
 #endif //HELLOWORLD_DISASTER_H

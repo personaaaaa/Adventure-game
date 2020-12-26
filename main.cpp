@@ -16,14 +16,14 @@ int main() {
         char choose[10];
         printf("this is the round %d\n", round);
         Disaster destory = disaster_get();
-        printf("%s has happended\n",get_disastername(destory));
-        if(get_disasternum(destory)>1){
+        printf("%s has happended\n",destory.get_disastername());
+        if(destory.get_disasternum()>1){
             printf("you have none grade\n");
             exit(0);
         }
         Gem gem = gem_get();
-        printf("you have get a %s\n",get_gemname(gem));
-        grade += get_gemgrade(gem);
+        printf("you have get a %s\n",gem.get_gemname());
+        grade += gem.get_gemgrade();
         printf("your grade is %d\n",grade);
         reinput:
         printf("if you want to continue? Yes OR No\n");

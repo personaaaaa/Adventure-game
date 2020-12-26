@@ -7,34 +7,21 @@
 #include<map>
 using namespace std;
 
-/* method 定义样例
-
 struct Gem {
     // 定义一些属性
-    ...
+    int id;   //宝石对应的唯一ID
+    char *name;   //宝石名称
+    int grade;  //宝石对应得分
 
-    // 定义方法（method）
-    int getGrade() {
-        return grade;
-    }
-
-    char *getName() {
+    // 定义方法（method）获取宝石的分数和名称
+    char* get_gemname(){
         return name;
     }
-}
-
-
- */
-
-// 定义结构体 - 宝石
-struct Gem {
-    // id - 作为宝石的唯一数字标记，每种宝石只有这一个标记
-    int id;
-    // name - 宝石名称
-    char *name;
-    // grade - 宝石得分
-    int grade;
+    int get_gemgrade(){
+        return grade;
+    }
 };
+
 //宝石的对应id获取
 map<int,Gem> gem;
 Gem gem_get(){
@@ -48,11 +35,5 @@ Gem gem_get(){
             return gem[i];
         }
     }
-}
-char* get_gemname(struct Gem gem){
-    return gem.name;
-}
-int get_gemgrade(struct Gem gem){
-    return gem.grade;
 }
 #endif //HELLOWORLD_GEM_H

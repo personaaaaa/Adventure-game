@@ -26,4 +26,11 @@ Disaster disaster_get(){
     disaster_kind[destory_num].num++;
     return disaster_kind[destory_num];
 }
+
+char *get_disastername(struct Disaster destory){
+    return destory.name;
+}
+int get_disasternum(struct Disaster destory){
+    return destory.num;
+}
 #endif //HELLOWORLD_DISASTER_H

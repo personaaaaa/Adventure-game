@@ -6,6 +6,26 @@
 #define NUM_GEM 3
 #include<map>
 using namespace std;
+
+/* method 定义样例
+
+struct Gem {
+    // 定义一些属性
+    ...
+
+    // 定义方法（method）
+    int getGrade() {
+        return grade;
+    }
+
+    char *getName() {
+        return name;
+    }
+}
+
+
+ */
+
 // 定义结构体 - 宝石
 struct Gem {
     // id - 作为宝石的唯一数字标记，每种宝石只有这一个标记

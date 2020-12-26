@@ -16,20 +16,17 @@ struct Gem {
     int grade;
 };
 //宝石的对应id获取
-int gem_get(int grade){
+map<int,Gem> gems;
+Gem gem_get(){
     srand(time(NULL));
     int number_gem = rand() % NUM_GEM + 1;
-    map<int,Gem> gems;
     gems[0] = {1,"hupo",1};
     gems[1] = {2,"zhuanshi",15};
     gems[2] = {3,"hongbaoshi",5};
     for(int i=0;i<gems.size();i++){
         if (number_gem==gems[i].id){
-            printf("you have get a %s\n",gems[i].name);
-            grade += gems[i].grade;
-            printf("your grade is %d\n",grade);
+            return gems[i];
         }
     }
-    return grade;
 }
 #endif //HELLOWORLD_GEM_H

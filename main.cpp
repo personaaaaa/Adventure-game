@@ -11,13 +11,20 @@ int main() {
     char name[100];
     printf("input your name:");
     scanf("%s", &name);
+    initialize_disaster();
     do {
         char choose[10];
         printf("this is the round %d\n", round);
-        if(disaster()){
+        Disaster destory = disaster_get();
+        printf("%s has happended\n",destory.name);
+        if(destory.num>1){
+            printf("you have none grade\n");
             exit(0);
         }
-        grade = gem_get(grade);
+        Gem gem = gem_get();
+        printf("you have get a %s\n",gem.name);
+        grade += gem.grade;
+        printf("your grade is %d\n",grade);
         reinput:
         printf("if you want to continue? Yes OR No\n");
         scanf("%s", &choose);

@@ -25,7 +25,7 @@ Adventure Game - practice for c language learning.
 C ++ 语法
 ---
 
-##### 类型
+##### 类型（type）
 - 基本类型
   ```
   // 不可被拆分成其他类型的类型，例如 char, int, long, float, double, 指针类型
@@ -145,7 +145,88 @@ C ++ 语法
       Person wang = {34, "wang", 2.5, 24};
       std::cout << "wang's age: " << wang.age << "wang's name: " << wang.name << std::endl;
   }
-  ```
+  ``` 
+##### 函数（function）
+- 数学中的函数
+    ```
+    z = f(x, y)
+    自变量：x 和 y
+    因变量：z
+    函数体：f
+    表示输入 x 和 y，经过一个变换 f，可以得到结果 z
+  
+    例如：z = x + y
+    输入 x = 1 和 y = 2，经过加法变换 "+"，得到 z = 3  
+    ```  
+    <font color="red"> 本质：给定多个输入 X，经过一个变换 f，得到一个输出 Y </font>
+    
+- 编程语言中的函数（function）
+    
+    本质上，编程语言中的 function 和数学中的 function 是一样的，如下
+    
+    ```
+    // 自变量：x（type = int） 和 y（type = int），又被称之为参数（argument）
+    // 因变量：无名（type = int），又被称之为返回值（returned value）
+    // 变换 f：花括号括起来的整个块，这个块可以有自己的名字，在这里被命名为 transform
+    int transform(int x, int y) {
+        return x + y;
+    }
+    ```
+  
+    编程语言重的 function 和数学中 function 的区别是：<font color="red">编程语言中的函数（function），对输入 X、输出 Y 做了类型（type）约束。 </font>
+    
+    另外，对于数学中的函数 z = f(x, y)，f(x, y) 能够拿来计算的数据只有 x 和 y，除此以外没有其他可以用来计算的数据，编程语言中的函数也是如此。
+    ```
+    // 错误示范
+    float add(float x, float y) {
+        // 错误，因为 q 在输入参数（argument）里面找不到，程序不知道 q 是从什么地方来的。
+        // 这也就意味着，函数体（花括号括起来的部分）能够使用的外界输入数据只有 x 和 y，没有其他的
+        int a = x + q;
+        return a;
+    }
+  
+    // 正确示范
+    float add(float x, float y) {
+        int a =  x + y;
+        return a;
+    }  
+    ```
+    讲这个错误例子，是为了说明编程语言中的函数（function），能够使用的外界数据只有圆括号里面的参数（argument）。
+    但有一种特殊情况，可以让函数使用不被包括在圆括号中的其他输入，这种特殊情况就是函数（function）的变种：方法（method）。
+    
+    ```
+    // 本小节代码例子
+    #include <iostream>
+  
+    struct Person {
+        int age;
+        char *name;
+    };
+  
+    int add(int x, int y) {
+        return x + y;
+    }
+  
+    // 计算两个人的年龄和
+    int calculateAgeSum(Person a, Person b) {
+        return add(a.age, b.age);
+    }
+  
+    int main() {
+        Person wang = {12, "wang"};
+        Person li = {24, "li"};
+        std::cout << "age sum: " << calculateAgeSum(wang, li) << std::endl;
+    }
+    ```
+  
+##### 方法（method）  
+当函数（function）和类（class）或结构体（struct）绑定的时候，这种函数（function）我们称之为方法（method）
+
+我们从两个方面来了解方法（method）：1、如何进行绑定；2、方法（method）相比普通的函数（function）有什么用？
+
+- 如何绑定
+- 方法（method）相比函数（function）的优势
+
 程序为什么要这样改？
 ---
 

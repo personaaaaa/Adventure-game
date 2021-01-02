@@ -21,7 +21,131 @@ Adventure Game - practice for c language learning.
 - [ ] 对象数据用结构体保存
     - [ ] Gem 写入结构体，并用单独头文件保存
     - [ ] Disaster 写入结构体，并用单独头文件保存
+    
+C ++ 语法
+---
 
+##### 类型
+- 基本类型
+  ```
+  // 不可被拆分成其他类型的类型，例如 char, int, long, float, double, 指针类型
+  int a = 0;
+  char b = 'c';
+  long c = 1000;
+  float d = 4.5;
+  float e = 4.5f;
+  double f = 3.6;
+  // 各种各样的指针类型
+  float* a;
+  double* b;
+  long* c;
+  ```
+- 复杂类型
+ 
+  由基本类型、复杂类型组合在一起的类型。组合方式有两种：1、结构体（struct）；2、类（class）
+  
+  ```
+  // 1. 基本类型组合在一起(每个基本类型可以被称之为这个复杂类型的属性)
+  struct Person {
+      // 年龄
+      int age;
+      // 名字
+      char *name;
+      // 身高
+      float height;
+      // 体重
+      float weight;
+  };
+  // 创建一个变量，类型是 Person
+  Person son = {3, "wang", 1.67, 65}; // 花括号里面的数据，按照顺序依次初始化 son 里面的属性
+  Person mother; // 这里没有使用花括号去初始化 mother 里面的属性，因此属性的值是不确定的。
+  
+  
+  ```
+ 
+  ```
+  // 2. 复杂类型组合成复杂类型（这里采用结构体 struct ）
+  struct Famliy {
+      // Person 也是一个复杂类型
+      Person son;
+      Person mother;
+      Person father;
+  };
+  
+  // 创建一个变量，类型是 Famliy。并分别初始化 Famliy 里面的属性
+  struct Famliy famliy;
+  // 创建一个儿子
+  struct Person wang = {3, "wang", 1.67, 65};
+  famliy.son = wang; // 可以通过 "变量.属性" 的方式来访问复杂类型中的某一个属性，并赋值
+  
+  // 创建母亲
+  struct Person li = {4, "li", 4.54, 12};
+  famliy.mother = li;
+  
+  // 创建父亲
+  struct Person wang1 = {32, "wang1", 5.21, 23.5};
+  famliy.father = wang1;
+  ```
+
+  ```
+  // 3. 复杂类型组合成复杂类型（这里采用类 class ）
+  class Famliy {
+  /** 
+   * 说明：这里加上了 public 关键字（keyword）。表示 public 后面跟着的属性都是可以被外界直接访问的。
+   * 也就是说外界可以通过 "变量.属性" 的方式访问 son mother father 这些东西。
+   *
+   * 那为什么 struct 里面不用加 "public:"，是因为 struct 里面的属性默认都是 public，而 class 里面
+   * 的属性默认都是外界不可访问的（private）的
+  */
+  public: 
+      // Person 也是一个复杂类型
+      Person son;
+      Person mother;
+      Person father;
+  }; 
+      
+  // 创建一个变量，类型是 Famliy。并分别初始化 Famliy 里面的属性
+  Famliy famliy;
+  // 创建一个儿子
+  Person wang;
+  wang.age = 3;
+  wang.name = "wang";
+  wang.height = 1.67;
+  wang.weight = 65;
+  famliy.son = wang; // 可以通过 "变量.属性" 的方式来访问复杂类型中的某一个属性，并赋值
+      
+  // 创建母亲
+  Person li;
+  li.age = 4;
+  li.name = "li";
+  li.height = 1.87;
+  li.weight = 12;
+  famliy.mother = li;
+      
+  ...   
+  ```
+  <font color="red"> 注意对比下 2 和 3 里面的复杂类型的初始化有什么不同 </font>
+
+  ```
+  // 一份代码例子
+  #include <iostream>
+  
+  struct Person {
+      // 年龄
+      int age;
+      // 名字
+      char *name;
+      // 身高
+      float height;
+      // 体重
+      float weight;
+  };
+  
+  int main() {
+      Person wang = {34, "wang", 2.5, 24};
+      std::cout << "wang's age: " << wang.age << "wang's name: " << wang.name << std::endl;
+  }
+  ```
 程序为什么要这样改？
 ---
 

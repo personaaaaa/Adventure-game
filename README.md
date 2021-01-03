@@ -25,7 +25,7 @@ Adventure Game - practice for c language learning.
 C ++ 语法
 ---
 
-##### 变量（variable）
+#### 变量（variable）
 - 变量是用来做什么的
     
     TODO
@@ -34,11 +34,11 @@ C ++ 语法
 
     TODO
 
-##### 常量（constant）
+#### 常量（constant）
 
 TODO
 
-##### 类型（type）
+#### 类型（type）
 - 基本类型（basic type）
   ```
   // 不可被拆分成其他类型的类型，例如 char, int, long, float, double, 指针类型
@@ -168,7 +168,7 @@ TODO
       std::cout << "wang's age: " << wang.age << "wang's name: " << wang.name << std::endl;
   }
   ``` 
-##### 函数（function）
+#### 函数（function）
 - 数学中的函数
     ```
     z = f(x, y)
@@ -241,7 +241,7 @@ TODO
     }
     ```
   
-##### 方法（method）  
+#### 方法（method）  
 当函数（function）和复杂类型（class 或 struct）绑定的时候，这种函数（function）我们称之为方法（method）
 
 我们从两个方面来了解方法（method）：1、如何进行绑定；2、方法（method）相比普通的函数（function）有什么用？
@@ -345,7 +345,9 @@ TODO
     };
     ```
     
-##### 构造方法（construct method），一种特殊的方法（method）
+#### 构造方法（construct method）
+
+构造方法之所以拿出来单独讲，是因为它是<font color="red">一种特殊的方法（method）</font>，它没有明确的写明他的返回类型是什么。为了深入理解这一点，就接着往下看。
 
 - 为什么要有 **构造方法** 这种东西？
 

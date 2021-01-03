@@ -70,8 +70,8 @@ TODO
       float weight;
   };
   // 创建一个变量，类型是 Person
-  Person son = {3, "wang", 1.67, 65}; // 花括号里面的数据，按照顺序依次初始化 son 里面的属性
-  Person mother; // 这里没有使用花括号去初始化 mother 里面的属性，因此属性的值是不确定的。
+  struct Person son = {3, "wang", 1.67, 65}; // 花括号里面的数据，按照顺序依次初始化 son 里面的属性
+  struct Person mother; // 这里没有使用花括号去初始化 mother 里面的属性，因此属性的值是不确定的。
   
   
   ```
@@ -80,9 +80,9 @@ TODO
   // 2. 复杂类型组合成复杂类型（这里采用结构体 struct ）
   struct Famliy {
       // Person 也是一个复杂类型
-      Person son;
-      Person mother;
-      Person father;
+      struct Person son;
+      struct Person mother;
+      struct Person father;
   };
   
   // 创建一个变量，类型是 Famliy。并分别初始化 Famliy 里面的属性
@@ -101,7 +101,15 @@ TODO
   ```
 
   ```
-  // 3. 复杂类型组合成复杂类型（这里采用类 class ）
+  // 3. 复杂类型组合成复杂类型（这里采用类 class，注意看 Famliy ）
+  class Person {
+  public:
+      int age;
+      char* name;
+      float height;
+      float weight;
+  };
+  
   class Famliy {
   /** 
    * 说明：这里加上了 public 关键字（keyword）。表示 public 后面跟着的属性都是可以被外界直接访问的。
@@ -119,6 +127,7 @@ TODO
       
   // 创建一个变量，类型是 Famliy。并分别初始化 Famliy 里面的属性
   Famliy famliy;
+  
   // 创建一个儿子
   Person wang;
   wang.age = 3;

@@ -546,6 +546,95 @@ TODO
         // 以上三种 construct method 的调用都可以，因为我写了三个不同的 construct method
         ```
    
+    附上本节可运行代码   
+    ```
+    #include <iosteam>
+    #include <cstring>
+    
+    class Person {
+    public:
+        Person() {}
+  
+        Person(int age, std::string name) {
+            _age = age;
+            _name = name;
+        }
+  
+        Person(Person a, Person b) {
+            _age = 1;
+            _name = a.getName() + b.getName;
+        }
+  
+        int getAge() {
+            return _age;
+        }
+  
+        std::string getName() {
+            return _name;
+        }
+  
+        void setAge(int age) {
+            _age = age;
+        }
+  
+        void setName(std::string name) {
+            _name = name;
+        }
+  
+    private:
+        int age;
+        std::string name;
+    }
+  
+    class Famliy {
+    public:
+        Famliy(Person father, Person mother, Person me) {
+            _father = father;
+            _mother = mother;
+            _me = me;
+        }
+  
+        Person getFater() {
+            return _father;
+        }
+  
+        Person getMother() {
+            return _mother;
+        }
+  
+        Person getMe() {
+            return _me;
+        }
+  
+        std::string description() {
+            return "father: " + _father.getName() + " _mother: " + _mother.getName + " me: " + _me.getName();
+        }
+  
+    private:
+        Person _father;
+        Person _mother;
+        Person _me;
+    }
+  
+    int main() {
+        // 组建家庭
+        
+        // 创建父亲
+        Person father = Person(12, "wang");
+    
+        // 创建母亲
+        Person mother = Person();
+        mother.setName("li");
+        mother.setAge(1);
+  
+        // 创建我
+        Person me = Person(father, mother);
+  
+        // 组建家庭
+        Famliy f = Famliy(father, mother, me);
+        std::cout << f.description() << std::endl;
+    }
+    ```
     
 程序为什么要这样改？
 ---

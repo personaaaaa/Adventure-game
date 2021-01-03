@@ -25,6 +25,19 @@ Adventure Game - practice for c language learning.
 C ++ 语法
 ---
 
+##### 变量（variable）
+- 变量是用来做什么的
+    
+    TODO
+    
+- 什么是变量
+
+    TODO
+
+##### 常量（constant）
+
+TODO
+
 ##### 类型（type）
 - 基本类型
   ```
@@ -220,12 +233,82 @@ C ++ 语法
     ```
   
 ##### 方法（method）  
-当函数（function）和类（class）或结构体（struct）绑定的时候，这种函数（function）我们称之为方法（method）
+当函数（function）和复杂类型（class 或 struct）绑定的时候，这种函数（function）我们称之为方法（method）
 
 我们从两个方面来了解方法（method）：1、如何进行绑定；2、方法（method）相比普通的函数（function）有什么用？
 
 - 如何绑定
-- 方法（method）相比函数（function）的优势
+
+    将函数（function）写在复杂类型内部即可。
+    
+    ```
+    // 第一个例子
+    struct Person {
+        // 年龄
+        int age;
+        // 名字
+        char* name;
+        // 身高
+        float height;
+        // 体重
+        float weight;
+  
+        // 第一个方法
+        int getAge() {
+            return age;
+        }
+  
+        // 第二个方法
+        char* getName() {
+            return name;
+        }
+    };
+  
+    // 创建 wang
+    struct Person wang = {43, "wang", 24, 54.6};
+    
+    // 调用方法
+    wang.getName();
+  
+    // 第二个例子
+    class Person {
+    private:
+        // 年龄
+        int age;
+        // 名字
+        char* name;
+        // 身高
+        float height;
+        // 体重
+        float weight;
+     
+    public:
+        // 第一个方法
+        int getAge() {
+            return age;
+        }
+            
+        // Attention：如果不明白为什么方法里面可以使用 age 这个变量，就继续看下一小节    
+  
+        // 第二个方法
+        char* getName() {
+            return name;
+        }
+    };
+    
+    // 创建 Li
+    Person li;
+    li.age = 13;
+    li.name = "li";
+    li.height = 45.6;
+    li.weight = 32.1;
+    
+    // 调用方法
+    li.getAge();
+  
+    ```
+
+- 方法（method）相比函数（function）的优势（<font color="red">为什么要有方法这种东西？</font>）
 
 程序为什么要这样改？
 ---

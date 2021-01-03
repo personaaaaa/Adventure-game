@@ -351,10 +351,201 @@ TODO
 
 - 为什么要有 **构造方法** 这种东西？
 
-    为了能够更加方便的创建一个复杂类型变量
+    为了能够更加方便的（创建一个复杂类型变量/初始化一个变量）。
     
-    // TODO
+    我们先从一个简单的例子看起，这个例子是讲解如何初始化一个变量的
     
+    ```
+    // 声明一个类型为 int，名字为 a 的变量。并且用 1 去初始化 a 这个区域
+    int a = 1; /* 变量 a 里面的值是确定的，并且为 1 */
+  
+    // 如果只是声明一个变量 a，而不去初始化呢？如下
+    int a; /* 变量 a 里面的值是不确定的 */
+    ```
+  
+    以上讲解的是基本类型（basic type）的变量初始化，下面引出复杂类型（complex type），并且利用结构体 struct 来说明
+    ```
+    struct Person {
+        int age;
+        char* name;
+    };
+  
+    // 声明一个类型为 struct Person 的变量，并初始化它
+    struct Person wang = {13, "wang"};
+  
+    // 同理，如果只是声明而不初始化，则 wang 里面的属性（attribute）值是不确定的
+    struct Person wang; /* 此时 wang 里面的属性值都是不确定的 */
+    // 但是我可以接下来用点的方式去重新给 wang 里面的属性（attribute）赋值
+    wang.age = 1;
+    wang.name = "wang";
+  
+    ```
+    <font color="red">结论：上面写了两种初始化结构体的方法，很显然第一种用花括号的方式更加简洁</font>
+        
+    下面我们继续用 class 的方式去定义一个复杂类型（complex type），并初始化它
+    
+    ```
+    class Person {
+    public:
+        int age;
+        char* name;
+    }
+  
+    Person wang; /* 没有初始化，所以此时 wang 里面的属性是不确定的 */
+    wang.age = 1;
+    wang.name = "wang";
+    ```
+ 
+    为什么这个例子没有像 struct 一样用花括号去初始化 wang ？是因为 C++ 的 class 不允许这种初始化方式。
+    
+    再看下面这个例子:
+    
+    ```
+    class Person {
+    private: // public -> private，一点小改动
+        int age;
+        char* name;
+    }
+  
+    Person wang;
+    wang.age = 1; // 严重错误！！！age 属性已经被定义为私有了，无法通过外部赋值了
+    ```
+    现在就连分别给每个属性赋值的方式也不允许了。
+    
+    为了找到一种更高效的给复杂类型（complex）的变量（variable）初始化/赋值的方式，我们就要回到讲解本节的目的：构造方法（construct method）。我们先看下面这个构造方法的例子：
+    
+    ```
+    class Person {
+    private:
+        int _age;
+        char* _name;
+    
+    public:
+        // 这个方法就是 construct method，不过看起来它和之前说的普通 method 有点不太一样，比如：没有标明返回类型是什么。我们会在后面详细阐述这一点
+        Person(int age, char* name) {
+            _age = age;
+            _name = name;
+        }
+  
+        // 普通 method
+        int getAge() {
+            return _age;
+        }
+  
+        // 普通 method
+        char* getName() {
+            reutrn _name;
+        }
+    }
+  
+    Person wang = Person(12, "wang");
+    // wang 已经被构造方法给初始化了，所以下面这一行代码输出的 age 和 name 将不会是乱码
+    std::cout << "Person age: " << wang.getAge() << "Person name: " << wang.getName() << std::endl;
+    ```
+    
+    从字面意思理解，这里的 Person(12, "wang") 肯定是返回了一个什么东西让 wang 这个变量被初始化的。但从 Person(int, char*) 的定义来看，它并没有标注返回类型是什么，也没有在方法体（也就是花括号里面）里面写 return 语句。
+    
+    这就是构造方法（construct method）和普通方法（method）最大的不同，那就是：
+    * 构造方法是有返回值的，只不过省略不写；
+    
+        如此可以写一个有返回值的构造函数，方便人理解，如下：
+        ```
+        // Case 1: 正常写法
+        class Person {
+        public:
+            Person(int age, char* name) {
+                _age = age;
+                _name = name;
+            }
+          
+        private:
+            int _age;
+            char* _name;
+        }
+      
+        // Case 2: 给 construct method 加上返回值的写法。注意：这种写法在逻辑上和 Case 1 等价，但不会编译通过。这里之所以写出来是为了方便人理解
+        class Person {
+        public:
+            // 试着用 function / method 的结构来分析这个函数
+            Person Person(int age, char* name) {
+                Person x;
+                x._age = age;
+                x._name = name;
+                return x;      
+            }
+        
+        private:
+            int _age;
+            char* _name;
+        };
+        
+        // 这样就好理解多了，Person(int, char*) 实际上是创建了一个临时变量 x，并且给临时变量 x 里面的属性赋值，最后把 x 返回出去
+        Person wang = Person(12, "wang");
+        ```
+        
+        通过 Case 2 可以了解其实 construct method 是有返回类型的，这个返回类型就是 Person。并且这个返回的东西可以给 Person wang 赋值。由于返回类型和返回的数据都是固定是 Person，
+        所以程序语言设计中，就把返回值给省略了，方便人书写。
+        
+    * 普通方法可以任意命名，但是构造方法的命名必须要和所绑定的复杂类型的命名相同；
+    
+        这个问题可以理解成，编译器是如何区分一个 method 是普通 method 还是 construct method，例子如下：
+        ```
+        class Person {
+        public:
+            /* 
+             * 编译器知道这个 method 是 construct method，因为它的命名是 Person，和它所绑定的复杂类型 class Person 是同名的，
+             * 并且也省略了返回值，所以编译器知道它是 construct method
+             */
+            Person(int age, char* name) {
+                _age = age;
+                _name = name;
+            }
+      
+            /*
+             * 又是一个 construct method，编译器也可以识别，理由同上
+             */
+            Person(int age) {
+                _age = age;
+            }
+      
+            /*
+             * 第三个 construct method，编译器依然会认为这是一个 construct method
+             */
+            Person() {
+                // 你看，方法体里面是空的 
+            }
+      
+            /*
+             * 错误例子 1：
+             * 首先命名是 Person1212，和 class Person 的命名不一致，所以编译器认为这应该是一个普通 method。
+             * 但这个普通 method 却没有返回值，因此编译器认定此处代码有语法错误。
+             */
+            Person1212(int age, char* name) {
+                _age = age;
+                _name = name;
+            }
+      
+            /*
+             * 错误例子 2：
+             * 命名是 Person，和 class Person 命名一致，所以编译器认为这是一个 construct method。
+             * 但是 construct method 的返回值是可以省略的，而这里却画蛇添足加了一个返回值，所以编译器认定是语法错误报错
+             */
+            Person Person(int age, char* name) {
+                // 这里就不多解释了
+            }
+        private:
+            int _age;
+            char* _name;
+        }
+      
+        // 利用 construct method 去（初始化变量/去给变量赋值）
+        Person wang = Person(12, "wang");
+        Person li = Person(4);
+        Person hehe = Person();
+      
+        // 以上三种 construct method 的调用都可以，因为我写了三个不同的 construct method
+        ```
+   
     
 程序为什么要这样改？
 ---

@@ -39,7 +39,7 @@ C ++ 语法
 TODO
 
 ##### 类型（type）
-- 基本类型
+- 基本类型（basic type）
   ```
   // 不可被拆分成其他类型的类型，例如 char, int, long, float, double, 指针类型
   int a = 0;
@@ -53,7 +53,7 @@ TODO
   double* b;
   long* c;
   ```
-- 复杂类型
+- 复杂类型（complex type）
  
   由基本类型、复杂类型组合在一起的类型。组合方式有两种：1、结构体（struct）；2、类（class）
   
@@ -195,14 +195,14 @@ TODO
     }
     ```
   
-    编程语言重的 function 和数学中 function 的区别是：<font color="red">编程语言中的函数（function），对输入 X、输出 Y 做了类型（type）约束。 </font>
+    编程语言中的 function 和数学中 function 的区别是：<font color="red">编程语言中的函数（function），对输入 X、输出 Y 做了类型（type）约束。 </font>
     
-    另外，对于数学中的函数 z = f(x, y)，f(x, y) 能够拿来计算的数据只有 x 和 y，除此以外没有其他可以用来计算的数据，编程语言中的函数也是如此。
+    另外，对于数学中的函数 z = f(x, y)，f(x, y) 能够拿来计算的数据只有 x 和 y，除此以外没有其他可以用来计算的数据，编程语言中的函数也是如此，如下：
     ```
     // 错误示范
     float add(float x, float y) {
         // 错误，因为 q 在输入参数（argument）里面找不到，程序不知道 q 是从什么地方来的。
-        // 这也就意味着，函数体（花括号括起来的部分）能够使用的外界输入数据只有 x 和 y，没有其他的
+        // 这也就意味着，函数体（花括号括起来的部分）能够使用的外界输入只有 x 和 y，没有其他的
         int a = x + q;
         return a;
     }
@@ -248,7 +248,7 @@ TODO
 
 - 如何绑定
 
-    将函数（function）写在复杂类型内部即可。
+    将函数（function）写在复杂类型（complex type）内部即可。
     
     ```
     // 第一个例子
@@ -319,6 +319,41 @@ TODO
 
 - 方法（method）相比函数（function）的优势（<font color="red">为什么要有方法这种东西？</font>）
 
+    回顾 **如何绑定** 这一节中的代码例子，发现例子中的方法竟然使用了除了输入参数之外的数据！
+    这岂不是和之前讲的 - **函数能够使用的外界数据，全部放在输入参数（argument）中** - 这一观点相违背了吗？
+    
+    其实这就是方法（method）相比函数（function）的优势：方法可以使用与之绑定的复杂类型（complex type）内部的任意属性（attribute），如下
+    
+    ```
+    class Person {
+    private:
+        // 年龄
+        int age;
+        // 名字
+        char* name;
+        // 身高
+        float height;
+        // 体重
+        float weight;
+    
+    public:     
+        // 注释：getAge() 和复杂类型（complex type）Person 绑定在了一起，所以 getAge() 可以使用 Person 内的任意变量
+        int getAge() {
+            // 注释：比如这里的 age，就是 Person 里面的属性
+            return age;
+        }
+    };
+    ```
+    
+##### 构造方法（construct method），一种特殊的方法（method）
+
+- 为什么要有 **构造方法** 这种东西？
+
+    为了能够更加方便的创建一个复杂类型变量
+    
+    // TODO
+    
+    
 程序为什么要这样改？
 ---
 

@@ -10,14 +10,16 @@ int main() {
     int round = 1, flag = 0, grade = 0;
     char name[100];
     printf("input your name:");
-    scanf("%s", &name);
+    scanf("%s", name);
     initialize_disaster();
+    initialize_gem();
     do {
         char choose[10];
         printf("this is the round %d\n", round);
-        Disaster destory = disaster_get();
-        printf("%s has happended\n",destory.get_disastername());
-        if(destory.get_disasternum()>1){
+        Disaster *destory = disaster_get();
+        destory->happens();
+        printf("%s has happended\n",destory->getName());
+        if(destory->getOccurrence()>1){
             printf("you have none grade\n");
             exit(0);
         }
@@ -27,7 +29,7 @@ int main() {
         printf("your grade is %d\n",grade);
         reinput:
         printf("if you want to continue? Yes OR No\n");
-        scanf("%s", &choose);
+        scanf("%s", choose);
         if (strcmp(choose, "Yes") == 0 or strcmp(choose, "yes") == 0) {
             flag = 1;
             printf("continue\n");
@@ -42,7 +44,6 @@ int main() {
         round += 1;
     } while (flag == 1);
 }
-
 /*
 #include<stdio.h>
 int main(){

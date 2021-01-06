@@ -5,32 +5,51 @@
 #define HELLOWORLD_DISASTER_H
 #define NUM_DESTORY 5
 //定义灾难的结构体
-struct Disaster{
+class Disaster{
+private:
     char *name;
     int id;
-    int num;
+    int occurrence;
+public:
+    Disaster();
+
+    Disaster(char* na,int i,int nu);
+
     //方法定义：获取灾难的名称和发生次数
-    char *get_disastername(){
+    char *getName(){
         return name;
     }
-    int get_disasternum(){
-        return num;
+    int getOccurrence(){
+        return occurrence;
+    }
+    void happens(){
+        occurrence ++;
     }
 };
+//构造函数初始化
+Disaster::Disaster(char *na,int i,int nu) {
+    name = na;
+    id = i;
+    occurrence = nu;
+}
+Disaster::Disaster(){
+
+}
+
 //灾难map的定义初始化
-map <int,Disaster> disaster_kind;
+map <int,Disaster *> disasterMap;
 void initialize_disaster(){
-    disaster_kind[0] = {"dizheng",1,0};
-    disaster_kind[1] = {"tafang",2,0};
-    disaster_kind[2] = {"mengshou",3,0};
-    disaster_kind[3] = {"hongshui",4,0};
-    disaster_kind[4] = {"ganhan",5,0};
+    disasterMap[0] = new Disaster("dizheng",1,0);
+    disasterMap[1] = new Disaster("tafang",2,0);
+    disasterMap[2] = new Disaster("mengshou",3,0);
+    disasterMap[3] = new Disaster("hongshui",4,0);
+    disasterMap[4] = new Disaster("ganhan",5,0);
 }
 //灾难对应id的获取
-Disaster disaster_get(){
+Disaster *disaster_get(){
     srand(time(NULL));
     int destory_num = rand() % NUM_DESTORY;
-    disaster_kind[destory_num].num++;
-    return disaster_kind[destory_num];
+    //add(disasterMap[destory_num]);
+    return disasterMap[destory_num];
 }
 #endif //HELLOWORLD_DISASTER_H

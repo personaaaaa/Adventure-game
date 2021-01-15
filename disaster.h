@@ -48,8 +48,8 @@ void initialize_disaster(){
 //灾难对应id的获取
 Disaster *disaster_get(){
     srand(time(NULL));
-    int destory_num = rand() % NUM_DESTORY;
+    int destoryNum = rand() % NUM_DESTORY;
     //add(disasterMap[destory_num]);
-    return disasterMap[destory_num];
+    return disasterMap[destoryNum];
 }
 #endif //HELLOWORLD_DISASTER_H

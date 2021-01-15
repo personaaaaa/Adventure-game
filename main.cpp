@@ -1,3 +1,4 @@
+
 //冒险游戏设计
 #include<stdio.h>
 #include<iostream>
@@ -13,6 +14,7 @@ int main() {
     scanf("%s", name);
     initialize_disaster();
     initialize_gem();
+    initialize_chest();
     do {
         char choose[10];
         printf("this is the round %d\n", round);
@@ -23,9 +25,9 @@ int main() {
             printf("you have none grade\n");
             exit(0);
         }
-        Gem gem = gem_get();
-        printf("you have get a %s\n",gem.get_gemname());
-        grade += gem.get_gemgrade();
+        Fortune *money = getMoney();
+        printf("you have get a %s\n",money->getName());
+        grade += money->getGrade();
         printf("your grade is %d\n",grade);
         reinput:
         printf("if you want to continue? Yes OR No\n");
@@ -44,6 +46,7 @@ int main() {
         round += 1;
     } while (flag == 1);
 }
+
 /*
 #include<stdio.h>
 int main(){

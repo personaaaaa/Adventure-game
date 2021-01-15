@@ -4,45 +4,82 @@
 #ifndef HELLOWORLD_GEM_H
 #define HELLOWORLD_GEM_H
 #define NUM_GEM 3
+#define NUM_CHEST 2
 #include<map>
 using namespace std;
 
-class Gem {
-private:
-    // 定义一些属性
-    int id;   //宝石对应的唯一ID
-    char *name;   //宝石名称
-    int grade;  //宝石对应得分
+class Fortune{
 public:
-    Gem();
-    Gem(int i,char *na,int gr);
-    // 定义方法（method）获取宝石的分数和名称
-    char* get_gemname(){
+    Fortune(){}
+    virtual char *getName() = 0;
+    virtual int getGrade() = 0;
+};
+
+class Gemstone:public Fortune{
+private:
+    int id;
+    char *name;
+    int grade;
+public:
+    Gemstone(int i,char *na, int gr):Fortune(){
+        id = i;
+        name = na;
+        grade = gr;
+    }
+    char *getName(){
+        cout<<"you hava get a gemstone!"<<endl;
         return name;
     }
-    int get_gemgrade(){
+    int getGrade(){
         return grade;
     }
 };
-Gem::Gem(int i,char *na,int gr){
-    id = i;
-    name = na;
-    grade = gr;
-}
-Gem::Gem(){
-
-}
 //宝石的对应id获取
-map<int,Gem> gem_kind;
+map<int,Gemstone*> gemMap;
 void initialize_gem(){
-    gem_kind[0] = Gem(1,"hupo",1);
-    gem_kind[1] = Gem(2,"zhuanshi",15);
-    gem_kind[2] = Gem(3,"hongbaoshi",5);
+    gemMap[0] = new Gemstone(1,"hupo",1);
+    gemMap[1] = new Gemstone(2,"zhuanshi",15);
+    gemMap[2] = new Gemstone(3,"hongbaoshi",5);
 }
 
-Gem gem_get(){
+class Chest:public Fortune{
+private:
+    int id;
+    char *name1;
+    int grade1;
+    char *name2;
+    int grade2;
+public:
+    Chest(int i, char *na1, int gr1, char *na2, int gr2):Fortune(){
+        id = i;
+        name1 = na1;
+        grade1 = gr1;
+        name2 = na2;
+        grade2 = gr2;
+    }
+    char *getName(){
+        cout<<"you have get a chest!"<<endl;
+        return name1;
+    }
+    int getGrade(){
+        return grade1+grade2;
+    }
+};
+//宝箱的对应id获取
+map<int,Chest*> chestMap;
+void initialize_chest() {
+    chestMap[0] = new Chest(4, "hupo",1,"hongbaoshi",5);
+    chestMap[1] = new Chest(5, "zhuanshi", 15,"hongbaoshi", 5);
+}
+
+Fortune *getMoney(){
     srand(time(NULL));
-    int number_gem = rand() % NUM_GEM;
-    return gem_kind[number_gem];
+    int gemNumber = rand() % (NUM_GEM+NUM_CHEST);
+    if(gemNumber<NUM_GEM){
+        return gemMap[gemNumber];
+    }
+    else{
+        return chestMap[gemNumber-NUM_GEM];
+    }
 }
 #endif //HELLOWORLD_GEM_H

@@ -3,4 +3,6 @@ project(HelloWorld)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(HelloWorld main.cpp)
+include_directories(./include)
+
+add_executable(HelloWorld src/main.cpp)
